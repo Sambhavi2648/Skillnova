@@ -26,6 +26,67 @@ const loginSchema = z.object({
   rememberMe: z.boolean().optional().default(true),
 });
 
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: Authenticate user
+ *     responses:
+ *       200:
+ *         description: Login successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 accessToken:
+ *                   type: string
+ *                 refreshToken:
+ *                   type: string
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                     email:
+ *                       type: string
+ *                     name:
+ *                       type: string
+ *                     role:
+ *                       type: string
+ *                       enum: [SUPER_ADMIN, ADMIN, MENTOR, INTERN]
+ *                     permissions:
+ *                       type: array
+ *                       items:
+ *                         type: string
+ *                 step:
+ *                   type: string
+ *                   enum: [otp_required]
+ *                 challengeToken:
+ *                   type: string
+ *                 devCode:
+ *                   type: string
+ *                   description: OTP code in development mode only
+ *       400:
+ *         description: Invalid credentials
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *       429:
+ *         description: Too many login attempts
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ */
+
 const otpSchema = z.object({
   challengeToken: z.string().min(10),
   code: z.string().trim().min(4).max(10),
