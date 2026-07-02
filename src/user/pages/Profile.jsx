@@ -84,13 +84,23 @@ const Profile = () => {
 
   if (!profile) return <div className="flex items-center justify-center min-h-[60vh]"><Loader2 className="animate-spin" size={28} style={{ color: 'var(--muted)' }} /></div>;
 
+  const sanitize = (name, value) => {
+    if (typeof value !== 'string') return value;
+    let v = value.trim();
+    if (name === 'name') v = v.replace(/[<>'"&]/g, '').slice(0, 80);
+    if (name === 'department' || name === 'college') v = v.replace(/[<>'"&]/g, '').slice(0, 100);
+    if (name === 'yearOfStudy') v = v.replace(/[^0-9\-]/g, '').slice(0, 10);
+    if (name === 'linkedinUrl') v = v.replace(/[<>"&]/g, '').slice(0, 255);
+    return v;
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProfile((p) => ({ ...p, [name]: value }));
+    setProfile((p) => ({ ...p, [name]: sanitize(name, value) }));
     setSaved(false);
     if (touched[name]) {
       const f = FIELDS.find((x) => x.key === name);
-      setErrors((prev) => ({ ...prev, [name]: f?.validate ? f.validate(value) : '' }));
+      setErrors((prev) => ({ ...prev, [name]: f?.validate ? f.validate(sanitize(name, value)) : '' }));
     }
   };
 
