@@ -154,6 +154,8 @@ const Login = () => {
                 value={email}
                 autoComplete="email"
                 aria-required="true"
+                aria-label="Email address"
+                aria-describedby={`${emailId}-error`}
                 aria-invalid={emailState === 'error' ? 'true' : undefined}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -161,7 +163,7 @@ const Login = () => {
               {emailState === 'success' && <span className="auth-input-status"><Icon.Check /></span>}
               {emailState === 'error' && <span className="auth-input-status"><Icon.X /></span>}
             </div>
-            {emailState === 'error' && <p className="auth-msg auth-msg-error" role="alert"><Icon.Alert /> {fieldError.email}</p>}
+            {emailState === 'error' && <p id={`${emailId}-error`} className="auth-msg auth-msg-error" role="alert"><Icon.Alert /> {fieldError.email}</p>}
             {emailState === 'success' && <p className="auth-msg auth-msg-success"><Icon.Check /> Email looks good.</p>}
           </div>
 
@@ -180,6 +182,8 @@ const Login = () => {
                 value={password}
                 autoComplete="current-password"
                 aria-required="true"
+                aria-label="Password"
+                aria-describedby={`${passwordId}-error`}
                 style={{ paddingRight: '42px' }}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -188,7 +192,7 @@ const Login = () => {
                 <Icon.Eye open={showPwd} />
               </button>
             </div>
-            {pwdState === 'error' && <p className="auth-msg auth-msg-error" role="alert"><Icon.Alert /> {fieldError.password}</p>}
+            {pwdState === 'error' && <p id={`${passwordId}-error`} className="auth-msg auth-msg-error" role="alert"><Icon.Alert /> {fieldError.password}</p>}
           </div>
 
           {formError && (
