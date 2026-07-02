@@ -16,18 +16,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <ErrorBoundary>
       <App />
       <Toaster
-        position="top-right"
+        position={APP_CONSTANTS.TOAST_POSITION}
         toastOptions={{
           duration: APP_CONSTANTS.TOAST_DURATION,
-          style: {
-            background: 'var(--card)',
-            color: 'var(--text)',
-            border: '1px solid var(--border)',
-            borderRadius: '12px',
-            fontSize: '14px',
-            padding: '10px 14px',
-            boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
-          },
+          style: APP_CONSTANTS.TOAST_STYLE,
         }}
       />
     </ErrorBoundary>
