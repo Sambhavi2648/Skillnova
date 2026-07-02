@@ -176,6 +176,7 @@ app.use((err, req, res, _next) => {
   res.status(500).json({
     error: 'Internal server error',
     requestId: req.headers['x-request-id'] ?? undefined,
+    timestamp: new Date().toISOString(),
   });
 });
 
