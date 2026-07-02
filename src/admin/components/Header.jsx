@@ -6,16 +6,17 @@ import { Bell, Search, Shield, Sun, Moon, Menu } from 'lucide-react';
 import { useAuthStore } from '../../lib/auth';
 import { useNotifications } from '../../shared/hooks/useNotifications';
 import { formatRelative, initials } from '../../lib/utils';
+import { APP_CONSTANTS } from '../../shared/config/constants';
 
 const Header = ({ title, onMenuToggle }) => {
   const { user } = useAuthStore();
   const [showNotif, setShowNotif] = useState(false);
-  const [dark, setDark] = useState(() => localStorage.getItem('theme') === 'dark');
+  const [dark, setDark] = useState(() => localStorage.getItem(APP_CONSTANTS.THEME_STORAGE_KEY) === 'dark');
   const { items, unreadCount, markRead, markAllRead } = useNotifications();
 
   useEffect(() => {
-    if (dark) { document.documentElement.classList.add('dark'); localStorage.setItem('theme', 'dark'); }
-    else { document.documentElement.classList.remove('dark'); localStorage.setItem('theme', 'light'); }
+    if (dark) { document.documentElement.classList.add('dark'); localStorage.setItem(APP_CONSTANTS.THEME_STORAGE_KEY, 'dark'); }
+    else { document.documentElement.classList.remove('dark'); localStorage.setItem(APP_CONSTANTS.THEME_STORAGE_KEY, 'light'); }
   }, [dark]);
 
   return (

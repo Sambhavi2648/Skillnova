@@ -1,8 +1,8 @@
 import 'dotenv/config';
 import crypto from 'node:crypto';
 
-const required = ['DATABASE_URL', 'JWT_ACCESS_SECRET', 'JWT_REFRESH_SECRET', 'JWT_SECRET', 'CSRF_SECRET'];
 const isProd = process.env.NODE_ENV === 'production';
+const required = ['DATABASE_URL', 'JWT_ACCESS_SECRET', 'JWT_REFRESH_SECRET', 'JWT_SECRET', 'CSRF_SECRET', ...(isProd ? ['FILE_SIGN_SECRET'] : [])];
 const missing = required.filter((k) => !process.env[k]);
 
 if (missing.length) {
@@ -95,6 +95,19 @@ export const config = {
     clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
     enabled: process.env.GOOGLE_OAUTH_ENABLED === 'true',
     callbackUrl: (process.env.BACKEND_URL || process.env.APP_URL || 'http://localhost:4000') + '/api/v1/auth/google/callback',
+  },
+
+  security: {
+    bcryptRounds: Number(process.env.BCRYPT_ROUNDS) || 12,
+    otpHashRounds: Number(process.env.OTP_HASH_ROUNDS) || 8,
+    maxFailedAttempts: Number(process.env.ACCOUNT_LOCK_THRESHOLD) || 5,
+    lockDurationMs: Number(process.env.ACCOUNT_LOCK_DURATION_MS) || 15 * 60 * 1000,
+    refreshCookieMaxAge: Number(process.env.REFRESH_COOKIE_MAX_AGE) || 7 * 24 * 60 * 60 * 1000,
+    accessCookieMaxAge: Number(process.env.ACCESS_COOKIE_MAX_AGE) || 15 * 60 * 1000,
+    csrfCookieMaxAge: Number(process.env.CSRF_COOKIE_MAX_AGE) || 24 * 60 * 60 * 1000,
+    pendingSessionTtlSeconds: Number(process.env.PENDING_SESSION_TTL) || 15 * 60,
+    totpIssuer: process.env.TOTP_ISSUER || 'SkillNova',
+    fileSignSecret: process.env.FILE_SIGN_SECRET,
   },
 
   logLevel: process.env.LOG_LEVEL || 'info',

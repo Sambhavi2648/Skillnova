@@ -3,12 +3,11 @@
 // ════════════════════════════════════════════════════════════
 import { create } from 'zustand';
 import api, { getErrorMessage } from './api';
-
-const STORAGE_KEY = 'skillnova.auth';
+import { APP_CONSTANTS } from '../shared/config/constants';
 
 const loadFromStorage = () => {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(APP_CONSTANTS.AUTH_STORAGE_KEY);
     return raw ? JSON.parse(raw) : null;
   } catch {
     return null;
@@ -19,11 +18,11 @@ const persist = (state) => {
   try {
     if (state.user && state.accessToken) {
       localStorage.setItem(
-        STORAGE_KEY,
+        APP_CONSTANTS.AUTH_STORAGE_KEY,
         JSON.stringify({ user: state.user, accessToken: state.accessToken })
       );
     } else {
-      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(APP_CONSTANTS.AUTH_STORAGE_KEY);
     }
   } catch {
     /* ignore */

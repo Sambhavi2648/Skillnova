@@ -9,9 +9,12 @@ import { ApiError } from '../utils/ApiError.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
 import { audit } from '../services/audit.service.js';
 import { UPLOAD_DIR_PATH, UPLOAD_MAX_BYTES } from '../utils/upload.js';
+import { config } from '../config/index.js';
 
-// Signed-URL HMAC: short-lived, scoped to file + user
-const SIGN_SECRET = process.env.FILE_SIGN_SECRET || crypto.randomBytes(32).toString('hex');
+const SIGN_SECRET = config.security.fileSignSecret;
+if (!SIGN_SECRET && config.isProd) {
+  throw new Error('FILE_SIGN_SECRET is required in production');
+}
 
 function sign(payload) {
   const data = Buffer.from(JSON.stringify(payload)).toString('base64url');

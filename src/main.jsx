@@ -4,9 +4,10 @@ import ReactDOM from 'react-dom/client';
 import { Toaster } from 'react-hot-toast';
 import App from './App';
 import { ErrorBoundary } from './shared/components/ErrorBoundary';
+import { APP_CONSTANTS } from './shared/config/constants';
 import './index.css';
 
-if (localStorage.getItem('theme') === 'dark') {
+if (localStorage.getItem(APP_CONSTANTS.THEME_STORAGE_KEY) === 'dark') {
   document.documentElement.classList.add('dark');
 }
 
@@ -17,7 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Toaster
         position="top-right"
         toastOptions={{
-          duration: 4000,
+          duration: APP_CONSTANTS.TOAST_DURATION,
           style: {
             background: 'var(--card)',
             color: 'var(--text)',

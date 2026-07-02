@@ -51,6 +51,18 @@ export function createSocketServer(httpServer) {
       logger.info({ sub, role, sid: socket.id }, 'socket:connected');
     }
 
+    socket.on('join:project', (projectId) => {
+      socket.join(`project:${projectId}`);
+    });
+
+    socket.on('join:qa', (questionId) => {
+      socket.join(`qa:${questionId}`);
+    });
+
+    socket.on('leave:qa', (questionId) => {
+      socket.leave(`qa:${questionId}`);
+    });
+
     socket.on('ping', (cb) => cb?.('pong'));
 
     socket.on('disconnect', (reason) => {
@@ -69,4 +81,8 @@ export function getIO() {
   return io;
 }
 
-export default { createSocketServer, getIO };
+export function emitToRoom(room, event, data) {
+  io?.to(room).emit(event, data);
+}
+
+export default { createSocketServer, getIO, emitToRoom };

@@ -8,6 +8,7 @@ import {
   LayoutGrid, Calendar, Folder, Bell, Download, ChevronRight, ChevronLeft, LogOut,
 } from 'lucide-react';
 import { useAuthStore } from '../../lib/auth';
+import { APP_CONSTANTS } from '../../shared/config/constants';
 
 const MENU = [
   { id: 'dashboard',      label: 'Dashboard',      icon: LayoutDashboard },
@@ -40,7 +41,7 @@ const Sidebar = ({ active, onNavigate, forceMobileExpanded }) => {
     >
       <div className={`h-20 flex items-center gap-3 flex-shrink-0 ${isCollapsed ? 'px-3 justify-center' : 'px-4'}`} style={{ borderBottom: '1px solid #3d4446' }}>
         {!isCollapsed && (
-          <img src="/logo.png" alt="SkillNova" style={{ height: 48, mixBlendMode: 'lighten', filter: 'brightness(1.1) contrast(1.05)' }} />
+          <img src={APP_CONSTANTS.LOGO_PATH} alt="SkillNova" style={{ height: 48, mixBlendMode: 'lighten', filter: 'brightness(1.1) contrast(1.05)' }} />
         )}
         {isCollapsed && (
           <div className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-white text-sm flex-shrink-0"

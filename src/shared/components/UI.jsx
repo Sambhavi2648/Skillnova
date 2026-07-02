@@ -5,34 +5,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { TrendingUp, X, CheckSquare } from "lucide-react";
 
-// UptoSkills Brand Colors
-export const BRAND = {
-  orange:    "#ff6d34", // Main Brand Color
-  green:     "#00bea3",
-  dark:      "#2D3436",
-  orangeLight: "#fff3ee",
-  greenLight:  "#e6faf8",
-};
-
 const MotionDiv = motion.div;
-
-/* ── Avatar ─────────────────────────────────── */
-export const Avatar = ({ initials, size = "md" }) => {
-  const sizes = {
-    sm: "w-7 h-7 text-xs",
-    md: "w-9 h-9 text-sm",
-    lg: "w-12 h-12 text-base",
-    xl: "w-20 h-20 text-2xl",
-  };
-  return (
-    <div
-      className={`${sizes[size]} rounded-full flex items-center justify-center font-bold text-white flex-shrink-0`}
-      style={{ background: "linear-gradient(135deg, #ff6d34, #00bea3)" }}
-    >
-      {initials}
-    </div>
-  );
-};
 
 /* ── Badge ───────────────────────────────────── */
 export const Badge = ({ children, variant = "default" }) => {

@@ -12,7 +12,7 @@ const Management = () => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [modal, setModal] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '', password: 'User#2026', department: '', role: 'INTERN' });
+  const [form, setForm] = useState({ name: '', email: '', password: '', department: '', role: 'INTERN' });
 
   const fetch = async () => {
     setLoading(true);
@@ -33,7 +33,7 @@ const Management = () => {
       await api.post('/users', { ...form, skills: '' });
       notify.success('Intern added.');
       setModal(false);
-      setForm({ name: '', email: '', password: 'User#2026', department: '', role: 'INTERN' });
+      setForm({ name: '', email: '', password: '', department: '', role: 'INTERN' });
       fetch();
     } catch (err) {
       notify.error(err.response?.data?.error || 'Failed.');

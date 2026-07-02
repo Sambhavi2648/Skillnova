@@ -4,6 +4,7 @@
 import { useState, useId, useEffect } from 'react';
 import { useAuthStore } from '../../lib/auth';
 import notify from '../../lib/toast';
+import { APP_CONSTANTS } from '../../shared/config/constants';
 import '../auth.css';
 
 const Icon = {
@@ -44,8 +45,15 @@ const isValidEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
 
 const Login = () => {
   const uid = useId();
+  const [demoAccounts, setDemoAccounts] = useState([]);
 
-  // Decode error from URL params (e.g. after Google OAuth callback redirect)
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL || '/api/v1'}/auth/demo-accounts`)
+      .then((r) => r.ok ? r.json() : [])
+      .then((d) => setDemoAccounts(Array.isArray(d.accounts) ? d.accounts : []))
+      .catch(() => setDemoAccounts([]));
+  }, []);
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const error = params.get('error');
@@ -125,7 +133,7 @@ const Login = () => {
 
       <div className="auth-card" role="main" aria-label="Sign in to SkillNova">
         <div className="flex justify-center mb-3">
-          <img src="/logo.png" alt="SkillNova" style={{ height: 44, mixBlendMode: 'multiply' }} />
+          <img src={APP_CONSTANTS.LOGO_PATH} alt="SkillNova" style={{ height: 44, mixBlendMode: 'multiply' }} />
         </div>
         <h1 className="auth-title">Welcome Back</h1>
         <p className="auth-subtitle">Sign in to your SkillNova account to continue.</p>
@@ -197,12 +205,7 @@ const Login = () => {
         <div className="auth-divider"><span>Demo Accounts</span></div>
 
         <div className="auth-demo-grid">
-          {[
-            { label: 'Super Admin', email: 'superadmin@skillnova.com', pwd: 'SuperAdmin#2026', color: '#7C3AED' },
-            { label: 'Admin',       email: 'admin@skillnova.com',      pwd: 'Admin#2026',      color: '#ff6d34' },
-            { label: 'Mentor',      email: 'mentor@skillnova.com',     pwd: 'Mentor#2026',     color: '#7C3AED' },
-            { label: 'Intern',      email: 'rahul@skillnova.com',      pwd: 'User#2026',       color: '#00bea3' },
-          ].map((d) => (
+          {demoAccounts.map((d) => (
             <button
               key={d.email}
               type="button"
@@ -233,7 +236,7 @@ const GoogleSignInButton = () => {
   const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
-    fetch('/api/v1/auth/google/status')
+    fetch(`${import.meta.env.VITE_API_URL || '/api/v1'}/auth/google/status`)
       .then((r) => r.json())
       .then((d) => setEnabled(d.enabled))
       .catch(() => {});
@@ -257,7 +260,7 @@ const GoogleSignInButton = () => {
         fontWeight: 500,
       }}
       onClick={() => {
-        window.location.href = '/api/v1/auth/google?returnTo=/';
+        window.location.href = `${import.meta.env.VITE_API_URL || '/api/v1'}/auth/google?returnTo=/`;
       }}
     >
       <svg width="18" height="18" viewBox="0 0 48 48">

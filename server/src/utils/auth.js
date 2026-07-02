@@ -9,7 +9,7 @@ import { config } from '../config/index.js';
 
 const ALGO = 'HS256';
 
-export const hashPassword = (plain) => bcrypt.hashSync(plain, 12);
+export const hashPassword = (plain) => bcrypt.hashSync(plain, config.security.bcryptRounds);
 export const verifyPassword = (plain, hash) => bcrypt.compareSync(plain, hash);
 
 export function signAccessToken(payload) {
@@ -57,7 +57,7 @@ export function generateOtp(length = 6) {
 }
 
 export function generateSecret() {
-  return speakeasy.generateSecret({ name: 'SkillNova', length: 32 });
+  return speakeasy.generateSecret({ name: config.security.totpIssuer, length: 32 });
 }
 
 export function verifyTotp(token, secret) {
