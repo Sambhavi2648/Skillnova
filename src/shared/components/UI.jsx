@@ -35,13 +35,13 @@ export const Card = ({ children, className = "", hover = false, onClick, delay =
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.3, delay }}
     onClick={onClick}
-    whileHover={hover ? { y: -5, boxShadow: "0 10px 25px -5px rgba(255,109,52,0.15)" } : {}}
+    whileHover={hover ? { y: -4, boxShadow: "0 12px 28px -6px rgba(255,109,52,0.18)" } : {}}
     className={`rounded-2xl ${className} ${hover ? 'cursor-pointer' : ''}`}
     style={{
       background: "var(--card)",
       border: "1px solid var(--border)",
       boxShadow: "var(--card-shadow)",
-      transition: "transform 0.2s ease, box-shadow 0.2s ease",
+      transition: "transform 0.22s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.22s ease",
     }}
   >
     {children}
