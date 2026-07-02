@@ -4,7 +4,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { TrendingUp, X, CheckSquare } from "lucide-react";
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 
 const MotionDiv = motion.div;
 
@@ -224,5 +224,35 @@ export const Modal = ({ isOpen, onClose, title, children, footer }) => {
       </>
     )}
   </AnimatePresence>
+  );
+};
+
+/* ── Tooltip ──────────────────────────────────── */
+export const Tooltip = ({ children, content, side = 'top' }) => {
+  const [show, setShow] = useState(false);
+  const positions = {
+    top: 'bottom-full left-1/2 -translate-x-1/2 mb-2',
+    bottom: 'top-full left-1/2 -translate-x-1/2 mt-2',
+    left: 'right-full top-1/2 -translate-y-1/2 mr-2',
+    right: 'left-full top-1/2 -translate-y-1/2 ml-2',
+  };
+
+  if (!content) return children;
+
+  return (
+    <span className="relative inline-flex"
+      onMouseEnter={() => setShow(true)}
+      onMouseLeave={() => setShow(false)}
+      onFocus={() => setShow(true)}
+      onBlur={() => setShow(false)}>
+      {children}
+      {show && (
+        <span className={`absolute z-50 px-2.5 py-1.5 text-xs font-medium rounded-lg shadow-lg whitespace-nowrap pointer-events-none ${positions[side]}`}
+          style={{ background: '#1f2937', color: '#f9fafb' }}
+          role="tooltip">
+          {content}
+        </span>
+      )}
+    </span>
   );
 };
