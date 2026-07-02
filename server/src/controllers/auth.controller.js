@@ -44,6 +44,7 @@ const REFRESH_COOKIE_OPTS = {
   secure: config.isProd,
   path: '/api/v1/auth',
   maxAge: config.security.refreshCookieMaxAge,
+  domain: config.isProd ? undefined : 'localhost',
 };
 
 const ACCESS_COOKIE_OPTS = {
@@ -52,6 +53,7 @@ const ACCESS_COOKIE_OPTS = {
   secure: config.isProd,
   path: '/',
   maxAge: config.security.accessCookieMaxAge,
+  domain: config.isProd ? undefined : 'localhost',
 };
 
 const CSRF_COOKIE_OPTS = {
@@ -60,6 +62,7 @@ const CSRF_COOKIE_OPTS = {
   secure: config.isProd,
   path: '/',
   maxAge: config.security.csrfCookieMaxAge,
+  domain: config.isProd ? undefined : 'localhost',
 };
 
 // ── Helpers ──────────────────────────────────────────────
