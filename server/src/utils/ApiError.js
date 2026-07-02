@@ -34,6 +34,15 @@ export class ApiError extends Error {
   static internal(msg = 'Internal server error') {
     return new ApiError(500, msg);
   }
+
+  static ok(data) {
+    return { success: true, data };
+  }
+
+  static paginated(items, total, page, limit) {
+    return { success: true, data: items, total, page, limit, totalPages: Math.ceil(total / limit) };
+  }
+}
   static payloadTooLarge(msg = 'Payload too large') {
     return new ApiError(413, msg);
   }

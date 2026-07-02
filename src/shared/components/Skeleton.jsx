@@ -22,3 +22,56 @@ export const EmptyState = ({ icon: Icon, title, description, action }) => (
     {action && <div className="mt-4">{action}</div>}
   </div>
 );
+
+export const SkillGapSkeleton = () => (
+  <div className="space-y-4 animate-fadeIn">
+    <div className="flex gap-3">
+      {[1, 2, 3].map((i) => (
+        <div key={i} className="skeleton h-24 rounded-xl flex-1" />
+      ))}
+    </div>
+    <div className="skeleton h-64 rounded-xl" />
+    <div className="grid grid-cols-2 gap-4">
+      {[1, 2, 3, 4].map((i) => (
+        <div key={i} className="skeleton h-32 rounded-xl" />
+      ))}
+    </div>
+  </div>
+);
+
+export const AuditLogSkeleton = () => (
+  <div className="space-y-3 animate-fadeIn">
+    {[1, 2, 3, 4, 5].map((i) => (
+      <div key={i} className="flex items-center gap-4 p-4 rounded-xl" style={{ background: 'var(--card)', border: '1px solid var(--border)' }}>
+        <div className="skeleton w-8 h-8 rounded-full flex-shrink-0" />
+        <div className="flex-1 space-y-2">
+          <div className="skeleton h-4 rounded w-1/3" />
+          <div className="skeleton h-3 rounded w-2/3" />
+        </div>
+        <div className="skeleton h-3 w-16 rounded" />
+      </div>
+    ))}
+  </div>
+);
+
+export const ReportsSkeleton = () => (
+  <div className="space-y-4 animate-fadeIn">
+    <div className="skeleton h-10 rounded-xl w-64" />
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {[1, 2, 3, 4].map((i) => (
+        <div key={i} className="skeleton h-40 rounded-xl" />
+      ))}
+    </div>
+  </div>
+);
+
+export const AttendanceSkeleton = () => (
+  <div className="space-y-4 animate-fadeIn">
+    <div className="skeleton h-32 rounded-xl" />
+    <div className="grid grid-cols-7 gap-2">
+      {Array.from({ length: 35 }).map((_, i) => (
+        <div key={i} className="skeleton aspect-square rounded-lg" />
+      ))}
+    </div>
+  </div>
+);
