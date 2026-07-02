@@ -1,6 +1,22 @@
+<div align="center">
+
 # SkillNova
 
+[![CI](https://github.com/rajat-wyrm/Skillnova/actions/workflows/ci.yml/badge.svg)](https://github.com/rajat-wyrm/Skillnova/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js](https://img.shields.io/badge/Node.js-20 LTS-green.svg?logo=node.js)](https://nodejs.org/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![GitHub stars](https://img.shields.io/github/stars/rajat-wyrm/Skillnova?style=social)](https://github.com/rajat-wyrm/Skillnova/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/rajat-wyrm/Skillnova?style=social)](https://github.com/rajat-wyrm/Skillnova/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/rajat-wyrm/Skillnova)](https://github.com/rajat-wyrm/Skillnova/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/rajat-wyrm/Skillnova)](https://github.com/rajat-wyrm/Skillnova/pulls)
+[![Code size](https://img.shields.io/github/languages/code-size/rajat-wyrm/Skillnova)](https://github.com/rajat-wyrm/Skillnova)
+[![Last commit](https://img.shields.io/github/last-commit/rajat-wyrm/Skillnova)](https://github.com/rajat-wyrm/Skillnova/commits/main)
+[![Contributors](https://img.shields.io/github/contributors/rajat-wyrm/Skillnova)](https://github.com/rajat-wyrm/Skillnova/graphs/contributors)
+
 A production-grade intern management platform for UptoSkills. Real-time, RBAC-protected, AI-grounded, and engineered for the operational needs of an internship program: onboarding, knowledge base, daily reports, attendance, projects, reviews, announcements, and analytics.
+
+</div>
 
 ---
 
